@@ -1,0 +1,47 @@
+Λοιπών μάγκες ο παρακάτω κώδικας είναι η ΒΔ που δίνεται απο εκφώνηση της εργασίας. Έτσι νομίζω δηλαδή!! Αυτήν ακριβώς έχω στο αρχικό σχέδιο που ανέβασα
+οπότε μπορείται να την εκτελέσεται στο δικό σας NetBeans για να έχουμε την ίδια βάση.
+Τα βήματα που έκανα είναι τα παρακάτω:
+1ο Βήμα:
+Πήγα στο tab services απο τα 3 που είναι στα αριστερά στο NetBeans και στo υπομενού "JAVA DB" πάτησα δεξί κλικ και "Create Database"
+Στη συνέχεια την ονόμασα ΜoviesDatabase  και εβαλα σαν username: OMADA3 και password (ότι νανε νομίζω δεν έχει σημασία).
+2ο Βήμα:
+Στην δημιουργημένη βάση μου πάτησα δεξι κλικ και επέλεξα "Connect.."
+Αυτό μου σύνδεσε την Βάση μου με το NetBeans
+3o Βήμα:
+Στο συνδεδεμένο jdbc:derby://localhost:1527/MoviesDatabase [omada3 on OMADA3], άνοιξα το υπομενού και μέσα έχει 2 φακέλους, το σχήμα "OMADA3" και το "Other Schemas".
+Στο σχημα OMADA3 έχει 3 υποφακέλους όπου και δημιούργησα τα tables.
+4ο Βήμα:
+Για ευκολία πατήστε δεξί κλικ στο μενού tables και διαλέξτε το "Execute Command.."
+Στο παράθυρο που θα ανοίξοι κάντε copy paste τον παρακάτω sql κώδικα και εκτελέστε το έτσι ώστε όλοι οι πίνακες να δημιουργηθούν αυτόματα με όλα τα primary keys και τα foreign keys.
+
+	        ||	||
+	       \ /     \ /
+
+create table "OMADA3".FAVORITE_LIST
+(
+	ID INTEGER not null primary key,
+	NAME VARCHAR(50) not null
+)
+
+create table "OMADA3".GENRE
+(
+	ID INTEGER not null primary key,
+	NAME VARCHAR(20) not null
+)
+
+create table "OMADA3".MOVIE
+(
+	ID INTEGER not null primary key,
+	TITLE VARCHAR(100) not null,
+	GENRE_ID INTEGER not null,
+	RELEASE_DATE DATE not null,
+	RATING DOUBLE not null,
+	OVERVIEW VARCHAR(500) not null,
+	FAVORITE_LIST_ID INTEGER not null,
+	Foreign Key (GENRE_ID) REFERENCES GENRE (ID),
+	Foreign Key (FAVORITE_LIST_ID) REFERENCES FAVORITE_LIST (ID)
+
+
+
+Υστερόγραφο: Αν κάποιος έχει διαφορετική προσέγκιση ή έχει κατι παραπάνω που έγω παρέλειψα, εννοείτε πως το συζητάμε για να το εκτελέσουμε όλοι!!!!
+)
