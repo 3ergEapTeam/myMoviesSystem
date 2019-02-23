@@ -5,19 +5,22 @@
  */
 package moviedatabase;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 /**
  *
- * @author Morenita
+ * @author Vlachogiannis
  */
 public class MovieGUI extends javax.swing.JFrame {
 
+    private EntityManagerFactory emf;
+    public static EntityManager em;
     /**
      * Creates new form MovieGUI
      */
     public MovieGUI() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,53 +31,58 @@ public class MovieGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        APIButton = new javax.swing.JButton();
+        favListButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        statsButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Movie List");
         setName(""); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setName(""); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 204));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Ανάκτηση και Αποθήκευση Δεδομένων Ταινιών");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        APIButton.setBackground(new java.awt.Color(204, 204, 204));
+        APIButton.setForeground(new java.awt.Color(0, 0, 0));
+        APIButton.setText("Ανάκτηση και Αποθήκευση Δεδομένων Ταινιών");
+        APIButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                APIButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 204));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Διαχείριση Λιστών Αγαπημένων Ταινιών");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        favListButton.setBackground(new java.awt.Color(204, 204, 204));
+        favListButton.setForeground(new java.awt.Color(0, 0, 0));
+        favListButton.setText("Διαχείριση Λιστών Αγαπημένων Ταινιών");
+        favListButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                favListButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 204));
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Αναζήτηση Ταινιών");
-
-        jButton4.setBackground(new java.awt.Color(0, 255, 0));
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Στατιστικά");
-
-        jButton5.setBackground(new java.awt.Color(153, 0, 51));
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Έξοδος");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(204, 204, 204));
+        searchButton.setForeground(new java.awt.Color(0, 0, 0));
+        searchButton.setText("Αναζήτηση Ταινιών");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        statsButton.setBackground(new java.awt.Color(255, 255, 51));
+        statsButton.setForeground(new java.awt.Color(0, 0, 0));
+        statsButton.setText("Στατιστικά");
+
+        exitButton.setBackground(new java.awt.Color(153, 0, 51));
+        exitButton.setForeground(new java.awt.Color(0, 0, 0));
+        exitButton.setText("Έξοδος");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -86,37 +94,37 @@ public class MovieGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(exitButton)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(favListButton)
                         .addGap(84, 84, 84))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(searchButton)
                         .addGap(136, 136, 136))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(APIButton)
                         .addGap(67, 67, 67))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(statsButton)
                         .addGap(158, 158, 158))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(APIButton)
                 .addGap(44, 44, 44)
-                .addComponent(jButton2)
+                .addComponent(favListButton)
                 .addGap(37, 37, 37)
-                .addComponent(jButton3)
+                .addComponent(searchButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(statsButton)
                 .addGap(20, 20, 20)
-                .addComponent(jButton5)
+                .addComponent(exitButton)
                 .addContainerGap())
         );
 
@@ -134,18 +142,24 @@ public class MovieGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);  //έξοδος με το κλικ
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void favListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favListButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_favListButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void APIButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APIButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_APIButtonActionPerformed
 
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        MovieSearch anazitisi = new MovieSearch();
+        anazitisi.setVisible(true);
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -184,11 +198,11 @@ public class MovieGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton APIButton;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JButton favListButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JButton statsButton;
     // End of variables declaration//GEN-END:variables
 }
