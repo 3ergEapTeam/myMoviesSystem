@@ -1,0 +1,31 @@
+*******************************
+create database: MoviesDatabase
+username: OMADA3
+password: 123456!
+*******************************
+*******************************
+*******************************
+sql Commands			
+*******************************
+create table "OMADA3".FAVORITE_LIST
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	NAME VARCHAR(50) not null
+);
+create table "OMADA3".GENRE
+(
+	ID INTEGER not null primary key,
+	NAME VARCHAR(20) not null
+);
+create table "OMADA3".MOVIE
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	TITLE VARCHAR(100) not null,
+	GENRE_ID INTEGER not null,
+	RELEASE_DATE DATE not null,
+	RATING DOUBLE not null,
+	OVERVIEW VARCHAR(2000),
+	FAVORITE_LIST_ID INTEGER,
+	Foreign Key (GENRE_ID) REFERENCES GENRE (ID),
+	Foreign Key (FAVORITE_LIST_ID) REFERENCES FAVORITE_LIST (ID)
+);
